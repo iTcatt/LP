@@ -19,7 +19,7 @@ list_append([A|X], Y, [A|Z]) :- list_append(X, Y, Z).
 list_remove(X, [X|T], T).
 list_remove(X, [Y|T], [Y|T1]) :- list_remove(X, T, T1).
 
-%
+% Все подсписки списка
 mysublist(S, L) :-
     list_append(_, L1, L),
     list_append(S, _, L1).
@@ -67,15 +67,3 @@ appender([Head|Tail], Head, New) :-
 appender([X|Tail], Head, New) :-
     X \= Head,
     appender(Tail, Head, New).
-
-
-    
-
-
-
-
-
-
-    
-
-

@@ -14,8 +14,7 @@ sum_list([Head|Tail], N) :-
 % средней балл
 average_mark(List, Avg) :-
     sum_list(List, Sum),
-    findall(X, subject(X, _), Subjects),
-    length(Subjects, Len),
+    length(List, Len),
     Avg is Sum / Len.
 
 % на основе списка говорит сдал ли студент
@@ -49,22 +48,18 @@ grade2(Subject, Result) :-
 
 % 3. Для каждой группы, найти студента (студентов) с максимальным средним баллом
 
-% нахождение максимального среднего балла
+% максимум из двух чисел
 mymax(X, Y, Res) :-
     (X >= Y, Res = X);
     (X < Y, Res = Y).
 
-% search_max([], 0).
-% search_max([Head|Tail], Max) :- 
-%     search_max(Tail, Max1),
-%     Max is max(Head, Max1).
-    
+% нахождение максимального среднего балла
 search_max([], 0).
 search_max([Head|Tail], Max) :- 
     search_max(Tail, Max1),
     mymax(Head, Max1, Max).
-
-%нахождение студентов с максимальным средним баллом
+    
+% нахождение студентов с максимальным средним баллом
 max_average(Group, Student, Max) :-
     group(Group, Names),
     findall(Average_mark, (member(X, Names), student(X, Average_mark, _)), List),
@@ -72,4 +67,3 @@ max_average(Group, Student, Max) :-
     member(Student, Names),
     student(Student, Avg, _),
     Avg == Max.
-
