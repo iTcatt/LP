@@ -1,1 +1,1 @@
-# LP
+# Logical Programming
